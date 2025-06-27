@@ -1,37 +1,30 @@
-function getLocationWeather() {
-  if (!navigator.geolocation) {
-    alert("Geolocation is not supported by your browser.");
-    return;
-  }
+// JavaScript
+function getWeather() {
+  const city = document.getElementById("city").value;
 
-  navigator.geolocation.getCurrentPosition(success, error);
+  fetch("api.json") // You must have a local file named `api.json` with the API key
+    .then(res => res.json())
+    .then(data => {
+      const apiKey = data.apiKey;
 
-  function success(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-    const apiKey = "5f7ee076a392b6eb4822fc48b8c4cfa1"; 
+      fetch(url)
+        .then(response => response.json())
+        .then(weather => {
+          const name = weather.name;
+          const temp = weather.main.temp;
+          const description = weather.weather[0].description;
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        const weatherBox = document.getElementById("weather");
-        weatherBox.innerHTML = `
-          <h3>${data.name}</h3>
-          <p>Temperature: ${data.main.temp} °C</p>
-          <p>Condition: ${data.weather[0].description}</p>
-        `;
-      })
-      .catch(err => {
-        document.getElementById("weather").textContent = "Failed to fetch weather.";
-        console.error(err);
-      });
-  }
-
-  function error(err) {
-    alert("Unable to retrieve your location.");
-    console.error(err);
-  }
+          document.getElementById("weatherResult").innerHTML = `
+            <h3>${name}</h3>
+            <p>Temperature: ${temp} °C</p>
+            <p>Weather: ${description}</p>
+          `;
+        })
+        .catch(error => {
+          document.getElementById("weatherResult").textContent = "City not found or network error!";
+          console.error("Weather fetch error:", error);
+        });
+    });
 }
