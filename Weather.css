@@ -1,0 +1,56 @@
+*
+{
+margin:0;
+padding:0;
+box-sizing: border-box;
+font-family:'Times New Roman', Times, serif;
+}
+
+.card
+{
+border:white;
+margin:auto;
+padding:50px 0 50px 10px;
+box-shadow:0 4px 8px 0 rgba(0,0,0,0.4);
+justify-content:center;
+border-radius:5px;
+width:300px;
+height:400px;
+background-image:url(sky-5907605_1280.jpg),url(Hill.jpg);
+}
+
+.search input
+{
+margin:0 10px 20px 50px;
+border-radius:10px;
+border:1px solid black;
+outline:0;
+padding:10px;
+box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);
+color:rgb(27, 14, 14);
+font-weight: bold;
+width: 200px;
+}
+
+#weather
+{
+padding-top:20px;
+color:white;
+line-height: 30px;
+}
+
+#weather:first-child
+{
+    font-size:32px;
+}
+button
+{
+padding:10px;
+display:block;
+color:white;
+background-color:black;
+border:white;
+margin:auto;
+border-radius:4px;
+box-shadow:0 4px 8px 0 rgba(0,0,0,0.4);
+}
